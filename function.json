@@ -1,0 +1,116 @@
+{
+  "type": "vector.function",
+  "description": "Keyword-based Relevance Rankings.  Discover which piece of content is most relevant to specific keywords.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "keywords": {
+        "type": "array",
+        "description": "Keywords to evaluate relevance against.",
+        "minItems": 1,
+        "items": {
+          "type": "string",
+          "description": "A keyword to evaluate relevance against."
+        }
+      },
+      "contentItems": {
+        "type": "array",
+        "description": "Content items to be ranked for relevance.",
+        "minItems": 2,
+        "items": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Text content to be evaluated for relevance."
+            },
+            {
+              "type": "image",
+              "description": "Image content to be evaluated for relevance."
+            },
+            {
+              "type": "video",
+              "description": "Video content to be evaluated for relevance."
+            },
+            {
+              "type": "audio",
+              "description": "Audio content to be evaluated for relevance."
+            },
+            {
+              "type": "file",
+              "description": "File content to be evaluated for relevance."
+            },
+            {
+              "type": "array",
+              "description": "Array of content pieces to be evaluated for relevance.",
+              "minItems": 1,
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "description": "Text content to be evaluated for relevance."
+                  },
+                  {
+                    "type": "image",
+                    "description": "Image content to be evaluated for relevance."
+                  },
+                  {
+                    "type": "video",
+                    "description": "Video content to be evaluated for relevance."
+                  },
+                  {
+                    "type": "audio",
+                    "description": "Audio content to be evaluated for relevance."
+                  },
+                  {
+                    "type": "file",
+                    "description": "File content to be evaluated for relevance."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "required": ["keywords", "contentItems"]
+  },
+  "input_maps": {
+    "$jmespath": "to_array(input.contentItems)"
+  },
+  "tasks": [
+    {
+      "type": "scalar.function",
+      "owner": "WiggidyW",
+      "repository": "keyword-relevance",
+      "commit": "f83e3a5da0fcf92d941b503e329d8ab7e42b4a3a",
+      "map": 0,
+      "input": {
+        "$jmespath": "@.{keywords:input.keywords,content:map}"
+      }
+    },
+    {
+      "type": "vector.function",
+      "owner": "WiggidyW",
+      "repository": "relative-keyword-relevance-joined",
+      "commit": "b822dc5e8f772f6ce99b9c5223aafff009e405d9",
+      "input": {
+        "$jmespath": "input"
+      }
+    },
+    {
+      "type": "vector.function",
+      "owner": "WiggidyW",
+      "repository": "relative-keyword-relevance-split",
+      "commit": "2a66e578f29c6f685f16df64977762fe8865b351",
+      "input": {
+        "$jmespath": "input"
+      }
+    }
+  ],
+  "output": {
+    "$jmespath": "zip_map(&avg(@),[l1_normalize(tasks[0]),tasks[1],tasks[2]])"
+  },
+  "output_length": {
+    "$jmespath": "length(input.contentItems)"
+  }
+}
