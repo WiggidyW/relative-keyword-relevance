@@ -16,7 +16,7 @@
       "contentItems": {
         "type": "array",
         "description": "Content items to be ranked for relevance.",
-        "minItems": 2,
+        "minItems": 1,
         "items": {
           "anyOf": [
             {
@@ -92,7 +92,7 @@
       "type": "vector.function",
       "owner": "WiggidyW",
       "repository": "relative-keyword-relevance-joined",
-      "commit": "b822dc5e8f772f6ce99b9c5223aafff009e405d9",
+      "commit": "5f2b82985244a33e1aafd86a49ab3f66324fdbe3",
       "input": {
         "$jmespath": "input"
       }
@@ -101,7 +101,7 @@
       "type": "vector.function",
       "owner": "WiggidyW",
       "repository": "relative-keyword-relevance-split",
-      "commit": "2a66e578f29c6f685f16df64977762fe8865b351",
+      "commit": "0252b802d79582017291c140dd25e7242ea53590",
       "input": {
         "$jmespath": "input"
       }
@@ -112,5 +112,11 @@
   },
   "output_length": {
     "$jmespath": "length(input.contentItems)"
+  },
+  "input_split": {
+    "$jmespath": "zip_map(&{keywords:@[0],contentItems:[@[1]]},[repeat(input.keywords,length(input.contentItems)),input.contentItems])"
+  },
+  "input_merge": {
+    "$jmespath": "@.{keywords:input[0].keywords,contentItems:input[].contentItems[0]}"
   }
 }
