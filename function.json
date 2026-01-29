@@ -72,7 +72,10 @@
         }
       }
     },
-    "required": ["keywords", "contentItems"]
+    "required": [
+      "keywords",
+      "contentItems"
+    ]
   },
   "input_maps": {
     "$jmespath": "to_array(input.contentItems)"
@@ -82,7 +85,7 @@
       "type": "scalar.function",
       "owner": "WiggidyW",
       "repository": "keyword-relevance",
-      "commit": "f83e3a5da0fcf92d941b503e329d8ab7e42b4a3a",
+      "commit": "0d42674eb6cfbfa074cee45cd60b5478b2404e9e",
       "map": 0,
       "input": {
         "$jmespath": "@.{keywords:input.keywords,content:map}"
@@ -92,7 +95,7 @@
       "type": "vector.function",
       "owner": "WiggidyW",
       "repository": "relative-keyword-relevance-joined",
-      "commit": "5f2b82985244a33e1aafd86a49ab3f66324fdbe3",
+      "commit": "2efb7fdb5f1610006eca13bb5c4409d6c1158236",
       "input": {
         "$jmespath": "input"
       }
@@ -101,7 +104,7 @@
       "type": "vector.function",
       "owner": "WiggidyW",
       "repository": "relative-keyword-relevance-split",
-      "commit": "0252b802d79582017291c140dd25e7242ea53590",
+      "commit": "6781bf9ffb290ae4a1fe2771a16dc7bc8d4a2cca",
       "input": {
         "$jmespath": "input"
       }
