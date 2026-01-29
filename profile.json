@@ -4,17 +4,17 @@
     {
       "owner": "WiggidyW",
       "repository": "keyword-relevance",
-      "commit": "0d42674eb6cfbfa074cee45cd60b5478b2404e9e"
+      "commit": "944cf3958865ab4a3ae2162ee29fdf5505191bc3"
     },
     {
       "owner": "WiggidyW",
       "repository": "relative-keyword-relevance-joined",
-      "commit": "2efb7fdb5f1610006eca13bb5c4409d6c1158236"
+      "commit": "d87ff5f49e7a49c45bf911cc5dfd31edbba0c757"
     },
     {
       "owner": "WiggidyW",
       "repository": "relative-keyword-relevance-split",
-      "commit": "6781bf9ffb290ae4a1fe2771a16dc7bc8d4a2cca"
+      "commit": "e691a7735c3d58cdf3535e47ed5cd70505060aa8"
     }
   ]
 }
